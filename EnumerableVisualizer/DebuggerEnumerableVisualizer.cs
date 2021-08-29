@@ -664,7 +664,7 @@ using System.Xml.XPath;
 [assembly: DebuggerVisualizer(typeof(DebuggerEnumerableVisualizer), typeof(EnumerableObjectSource), TargetTypeName = "Microsoft.Data.ConnectionUI.DataConnectionDialog+DataSourceCollection, Microsoft.Data.ConnectionUI.Dialog", Description = DebuggerEnumerableVisualizer.Description)]
 
 //.net core
-[assembly: DebuggerVisualizer(typeof(DebuggerEnumerableVisualizer), typeof(EnumerableObjectSource), TargetTypeName = "System.Collections.Generic.List`1, mscorlib", Description = "aaa")]
+[assembly: DebuggerVisualizer(typeof(DebuggerEnumerableVisualizer), typeof(EnumerableObjectSource), TargetTypeName = "System.Collections.Generic.List`1, mscorlib", Description = DebuggerEnumerableVisualizer.Description)]
 
 //-Other classes
 [assembly: DebuggerVisualizer(typeof(DebuggerEnumerableVisualizer), typeof(EnumerableObjectSource), TargetTypeName = "System.Data.Linq.Table`1, System.Data.Linq", Description = DebuggerEnumerableVisualizer.Description)]
@@ -686,8 +686,7 @@ namespace CodeCapital.EnumerableVisualizer
     {
         protected override void Show(IDialogVisualizerService windowService, IVisualizerObjectProvider objectProvider)
         {
-            Console.WriteLine("Some Text Version 1");
-            Trace.Write("Aaaaa Text Version 1");
+           
         }
 
         public static void TestShowVisualizer(object objectToVisualize)

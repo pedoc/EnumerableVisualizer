@@ -1,11 +1,14 @@
 ﻿using EnumerableVisualizer.SharedTests;
 using System;
 using System.Collections.Generic;
+using CodeCapital.EnumerableVisualizer;
+using Microsoft.VisualStudio.DebuggerVisualizers;
 
 namespace EnumerableVisualizer.Tests
 {
     internal class Program
     {
+        [STAThread]
         private static void Main(string[] args)
         {
             var test = "Some text";
@@ -80,7 +83,9 @@ namespace EnumerableVisualizer.Tests
                 new Car(new Gadget("Self Drive")),
                 new Car(new Gadget("Tv"))
             };
-
+            VisualizerDevelopmentHost visualizeHost = new VisualizerDevelopmentHost(list4,
+                typeof(DebuggerEnumerableVisualizer), typeof(EnumerableObjectSource));
+            visualizeHost.ShowVisualizer();
             //CoreDebuggerEnumerableVisualizer.TestShowVisualizer(list4);
         }
     }

@@ -2,6 +2,7 @@
 using System;
 using System.IO;
 using System.Windows.Forms;
+using DevExpress.XtraEditors;
 
 namespace CodeCapital.EnumerableVisualizer
 {
@@ -16,7 +17,7 @@ namespace CodeCapital.EnumerableVisualizer
             }
             catch (Exception exp)
             {
-                MessageBox.Show(exp.Message, "VisualizerObjectSource Error");
+                XtraMessageBox.Show(exp.Message, @"VisualizerObjectSource Error");
             }
         }
     }
