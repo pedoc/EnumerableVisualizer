@@ -675,51 +675,31 @@ using System.Xml.XPath;
 [assembly: DebuggerVisualizer(typeof(DebuggerEnumerableVisualizer), typeof(EnumerableObjectSource), Target = typeof(SqlErrorCollection), Description = DebuggerEnumerableVisualizer.Description)]
 [assembly: DebuggerVisualizer(typeof(DebuggerEnumerableVisualizer), typeof(EnumerableObjectSource), Target = typeof(SqlParameterCollection), Description = DebuggerEnumerableVisualizer.Description)]
 //[assembly: DebuggerVisualizer(typeof(DebuggerEnumerableVisualizer), typeof(EnumerableObjectSource), TargetTypeName = "Oracle.DataAccess.Client.OracleParameterCollection, Oracle.DataAccess.Client", Description = DebuggerEnumerableVisualizer.Description)]
-[assembly: DebuggerVisualizer(typeof(StringVisualizer), typeof(VisualizerObjectSource), Target = typeof(System.String), Description = "My String Visualizer")]
+// [assembly: DebuggerVisualizer(typeof(StringVisualizer), typeof(VisualizerObjectSource), Target = typeof(System.String), Description = "My String Visualizer")]
 
 //[assembly: DebuggerVisualizer(typeof(DebuggerEnumerableVisualizer), typeof(EnumerableObjectSource), Target = typeof(List<>), Description = DebuggerEnumerableVisualizer.Description)]
 //[assembly: DebuggerVisualizer(typeof(DebuggerEnumerableVisualizer), typeof(EnumerableObjectSource), Target = typeof(Array), Description = DebuggerEnumerableVisualizer.Description)]
 //[assembly: DebuggerVisualizer(typeof(DebuggerEnumerableVisualizer), typeof(EnumerableObjectSource), Target = typeof(ArrayList), Description = DebuggerEnumerableVisualizer.Description)]
 namespace CodeCapital.EnumerableVisualizer
 {
-    public class StringVisualizer : DialogDebuggerVisualizer
-    {
-        protected override void Show(IDialogVisualizerService windowService, IVisualizerObjectProvider objectProvider)
-        {
-           
-        }
-
-        public static void TestShowVisualizer(object objectToVisualize)
-        {
-            //var visualizerHost = new VisualizerDevelopmentHost(objectToVisualize, typeof(DebuggerVisualizer));
-            var visualizerHost = new VisualizerDevelopmentHost(objectToVisualize, typeof(StringVisualizer), typeof(EnumerableObjectSource));
-
-            visualizerHost.ShowVisualizer();
-        }
-    }
-
     public class DebuggerEnumerableVisualizer : DialogDebuggerVisualizer
     {
         public const string Description = "Enumerable Visualizer 1.2";
 
         protected override void Show(IDialogVisualizerService windowService, IVisualizerObjectProvider objectProvider)
         {
-            Trace.Write(Description);
-
             try
             {
                 ShowVisualizer(objectProvider);
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Exception getting object data: " + ex.Message);
+                MessageBox.Show(@"Exception getting object data: " + ex.Message);
             }
         }
 
         private static void ShowVisualizer(IVisualizerObjectProvider objectProvider)
         {
-            Trace.WriteLine("Hello Update 3");
-
             var dataStream = objectProvider.GetData();
 
             if (dataStream != null && dataStream.Length > 0)
