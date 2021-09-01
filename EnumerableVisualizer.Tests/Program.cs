@@ -6,12 +6,29 @@ using Microsoft.VisualStudio.DebuggerVisualizers;
 
 namespace EnumerableVisualizer.Tests
 {
+    public class People
+    {
+        public string Name { get; set; }
+    }
     internal class Program
     {
         [STAThread]
         private static void Main(string[] args)
         {
+            var p = new People() { Name = "pedoc" };
             var test = "Some text";
+            var test1 = "{age:1}";
+
+            //try
+            //{
+            //    throw new Exception("异常可视化测试");
+            //}
+            //catch (Exception ex)
+            //{
+            //    VisualizerDevelopmentHost vh = new VisualizerDevelopmentHost(ex,
+            //        typeof(StringVisualizer), typeof(VisualizerObjectSource));
+            //    vh.ShowVisualizer();
+            //}
 
             //StringVisualizer.TestShowVisualizer(test);
 
@@ -83,9 +100,15 @@ namespace EnumerableVisualizer.Tests
                 new Car(new Gadget("Self Drive")),
                 new Car(new Gadget("Tv"))
             };
-            VisualizerDevelopmentHost visualizeHost = new VisualizerDevelopmentHost(list4,
+            var b = new byte[] { 0x1, 0x2, 0x3 };
+            VisualizerDevelopmentHost visualizeHost = new VisualizerDevelopmentHost(b,
                 typeof(DebuggerEnumerableVisualizer), typeof(EnumerableObjectSource));
             visualizeHost.ShowVisualizer();
+
+            //VisualizerDevelopmentHost visualizeHost = new VisualizerDevelopmentHost(test1,
+            //    typeof(StringVisualizer), typeof(VisualizerObjectSource));
+            //visualizeHost.ShowVisualizer();
+            //visualizeHost.ShowVisualizer();
             //CoreDebuggerEnumerableVisualizer.TestShowVisualizer(list4);
         }
     }

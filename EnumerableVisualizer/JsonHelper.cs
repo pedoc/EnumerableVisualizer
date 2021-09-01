@@ -41,7 +41,8 @@ namespace CodeCapital.EnumerableVisualizer
         {
             using (var reader = new StreamReader(stream))
             {
-                var jToken = JsonConvert.DeserializeObject(reader.ReadToEnd());
+                var x = reader.ReadToEnd();
+                var jToken = JsonConvert.DeserializeObject(x);
 
                 var jArray = new JArray();
 

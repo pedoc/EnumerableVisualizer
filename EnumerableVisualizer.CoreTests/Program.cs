@@ -1,4 +1,6 @@
-﻿using EnumerableVisualizer.SharedTests;
+﻿using CodeCapital.EnumerableVisualizer;
+using EnumerableVisualizer.SharedTests;
+using Microsoft.VisualStudio.DebuggerVisualizers;
 using System;
 using System.Collections.Generic;
 
@@ -9,6 +11,7 @@ namespace EnumerableVisualizer.CoreTests
         private static void Main(string[] args)
         {
             var test = "Some text";
+            var test1 = "{age:1}";
 
             //StringVisualizer.TestShowVisualizer(test);
 
@@ -82,6 +85,10 @@ namespace EnumerableVisualizer.CoreTests
             };
 
             //CoreDebuggerEnumerableVisualizer.TestShowVisualizer(list4);
+
+            VisualizerDevelopmentHost visualizeHost = new VisualizerDevelopmentHost(test1,
+               typeof(StringVisualizer), typeof(VisualizerObjectSource));
+            visualizeHost.ShowVisualizer();
         }
     }
 }

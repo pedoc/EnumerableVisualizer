@@ -1,5 +1,6 @@
 ﻿using CodeCapital.EnumerableVisualizer;
 using Microsoft.VisualStudio.DebuggerVisualizers;
+using Newtonsoft.Json.Linq;
 using System;
 using System.CodeDom;
 using System.CodeDom.Compiler;
@@ -18,6 +19,7 @@ using System.Data.OleDb;
 using System.Data.SqlClient;
 using System.Diagnostics;
 using System.Dynamic;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.NetworkInformation;
@@ -31,6 +33,7 @@ using System.Security.Cryptography.X509Certificates;
 using System.Security.Permissions;
 using System.Security.Policy;
 using System.Security.Principal;
+using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using System.Windows.Forms.Layout;
@@ -675,13 +678,91 @@ using System.Xml.XPath;
 [assembly: DebuggerVisualizer(typeof(DebuggerEnumerableVisualizer), typeof(EnumerableObjectSource), Target = typeof(SqlErrorCollection), Description = DebuggerEnumerableVisualizer.Description)]
 [assembly: DebuggerVisualizer(typeof(DebuggerEnumerableVisualizer), typeof(EnumerableObjectSource), Target = typeof(SqlParameterCollection), Description = DebuggerEnumerableVisualizer.Description)]
 //[assembly: DebuggerVisualizer(typeof(DebuggerEnumerableVisualizer), typeof(EnumerableObjectSource), TargetTypeName = "Oracle.DataAccess.Client.OracleParameterCollection, Oracle.DataAccess.Client", Description = DebuggerEnumerableVisualizer.Description)]
-// [assembly: DebuggerVisualizer(typeof(StringVisualizer), typeof(VisualizerObjectSource), Target = typeof(System.String), Description = "My String Visualizer")]
+[assembly: DebuggerVisualizer(typeof(StringVisualizer), typeof(VisualizerObjectSource), Target = typeof(System.String), Description = "Super String Visualizer")]
 
 //[assembly: DebuggerVisualizer(typeof(DebuggerEnumerableVisualizer), typeof(EnumerableObjectSource), Target = typeof(List<>), Description = DebuggerEnumerableVisualizer.Description)]
 //[assembly: DebuggerVisualizer(typeof(DebuggerEnumerableVisualizer), typeof(EnumerableObjectSource), Target = typeof(Array), Description = DebuggerEnumerableVisualizer.Description)]
 //[assembly: DebuggerVisualizer(typeof(DebuggerEnumerableVisualizer), typeof(EnumerableObjectSource), Target = typeof(ArrayList), Description = DebuggerEnumerableVisualizer.Description)]
+
+//[assembly: System.Diagnostics.DebuggerVisualizer(
+//   typeof(DebuggerEnumerableVisualizer),
+//   typeof(EnumerableObjectSource),
+//   Target = typeof(WeakReference),
+//   Description = DebuggerEnumerableVisualizer.Description)]
+//[assembly: System.Diagnostics.DebuggerVisualizer(
+//   typeof(DebuggerEnumerableVisualizer),
+//   typeof(EnumerableObjectSource),
+//   Target = typeof(WeakReference<byte[]>),
+//   Description = DebuggerEnumerableVisualizer.Description)]
+//[assembly: System.Diagnostics.DebuggerVisualizer(
+//   typeof(DebuggerEnumerableVisualizer),
+//   typeof(EnumerableObjectSource),
+//   Target = typeof(byte[]),
+//   Description = DebuggerEnumerableVisualizer.Description)]
 namespace CodeCapital.EnumerableVisualizer
 {
+    public class StringVisualizer : DialogDebuggerVisualizer
+    {
+        protected override void Show(IDialogVisualizerService windowService, IVisualizerObjectProvider objectProvider)
+        {
+            try
+            {
+                Console.WriteLine(this);
+                ShowVisualizer(objectProvider);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(@"Exception getting object data: " + ex.Message + "堆栈：" + ex.StackTrace);
+            }
+        }
+
+        private static void ShowVisualizer(IVisualizerObjectProvider objectProvider)
+        {
+            //var runtimeVer = System.Runtime.InteropServices.RuntimeInformation.FrameworkDescription;
+            //MessageBox.Show(runtimeVer);
+            object result = null;
+            if (!TryGetObject(objectProvider, out result))
+            {
+                var stream = (MemoryStream)objectProvider.GetData();
+
+                if (stream == null) return;
+                var bytes = stream.ToArray();
+                result = Encoding.UTF8.GetString(bytes.Skip(1).Take(bytes.Length - 2).ToArray());//直接读取的字符串会有""，所以此处去掉这个多余字符
+            }
+
+            //MessageBox.Show($"类型={result?.GetType().AssemblyQualifiedName}，值={result?.ToString()}");
+            if (result == null)
+            {
+                return;
+            }
+            if (result is string value)
+            {
+                ShowVisualizerForm(value);
+            }
+        }
+
+        private static bool TryGetObject(IVisualizerObjectProvider visualizerObjectProvider, out object value)
+        {
+            try
+            {
+                value = visualizerObjectProvider.GetObject();
+                return true;
+            }
+            catch
+            {
+                value = default;
+                return false;
+            }
+        }
+
+        private static void ShowVisualizerForm(string value)
+        {
+            var form = new StringVisualizerForm(value);
+
+            form.ShowDialog();
+        }
+    }
+
     public class DebuggerEnumerableVisualizer : DialogDebuggerVisualizer
     {
         public const string Description = "Enumerable Visualizer 1.2";
@@ -700,6 +781,24 @@ namespace CodeCapital.EnumerableVisualizer
 
         private static void ShowVisualizer(IVisualizerObjectProvider objectProvider)
         {
+            //byte[] obj = null;
+
+            //if (objectProvider.GetObject() is WeakReference<byte[]>)
+            //{
+            //    (objectProvider.GetObject() as WeakReference<byte[]>).TryGetTarget(out obj);
+            //}
+
+            //if (objectProvider.GetObject() is WeakReference)
+            //    obj = (objectProvider.GetObject() as WeakReference).Target as byte[];
+
+            //else if (objectProvider.GetObject() is byte[])
+            //    obj = objectProvider.GetObject() as byte[];
+            //if (obj != null)
+            //{
+            //    MessageBox.Show("obj");
+            //}
+
+            // var x = ((IVisualizerObjectProvider2)objectProvider).GetDeserializableObject().ToString();
             var dataStream = objectProvider.GetData();
 
             if (dataStream != null && dataStream.Length > 0)
@@ -715,14 +814,6 @@ namespace CodeCapital.EnumerableVisualizer
             var form = new VisualizerForm(data);
 
             form.ShowDialog();
-        }
-
-        public static void TestShowVisualizer(object objectToVisualize)
-        {
-            //var visualizerHost = new VisualizerDevelopmentHost(objectToVisualize, typeof(DebuggerVisualizer));
-            var visualizerHost = new VisualizerDevelopmentHost(objectToVisualize, typeof(DebuggerEnumerableVisualizer), typeof(EnumerableObjectSource));
-
-            visualizerHost.ShowVisualizer();
         }
     }
 }

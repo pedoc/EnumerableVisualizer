@@ -13,6 +13,8 @@
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
     <TargetFrameworkProfile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -32,6 +34,57 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="ActiproSoftware.Bars.WinForms, Version=21.1.0.0, Culture=neutral, PublicKeyToken=c27e062d3c1a4763, processorArchitecture=MSIL">
+      <HintPath>..\packages\ActiproSoftware.Controls.WinForms.Bars.21.1.0\lib\net40\ActiproSoftware.Bars.WinForms.dll</HintPath>
+    </Reference>
+    <Reference Include="ActiproSoftware.Docking.WinForms, Version=21.1.0.0, Culture=neutral, PublicKeyToken=c27e062d3c1a4763, processorArchitecture=MSIL">
+      <HintPath>..\packages\ActiproSoftware.Controls.WinForms.Docking.21.1.0\lib\net40\ActiproSoftware.Docking.WinForms.dll</HintPath>
+    </Reference>
+    <Reference Include="ActiproSoftware.Navigation.WinForms, Version=21.1.0.0, Culture=neutral, PublicKeyToken=c27e062d3c1a4763, processorArchitecture=MSIL">
+      <HintPath>..\packages\ActiproSoftware.Controls.WinForms.Navigation.21.1.0\lib\net40\ActiproSoftware.Navigation.WinForms.dll</HintPath>
+    </Reference>
+    <Reference Include="ActiproSoftware.Shared.WinForms, Version=21.1.0.0, Culture=neutral, PublicKeyToken=c27e062d3c1a4763, processorArchitecture=MSIL">
+      <HintPath>..\packages\ActiproSoftware.Controls.WinForms.Shared.21.1.0\lib\net40\ActiproSoftware.Shared.WinForms.dll</HintPath>
+    </Reference>
+    <Reference Include="ActiproSoftware.SyntaxEditor.Addons.DotNet.WinForms, Version=21.1.0.0, Culture=neutral, PublicKeyToken=c27e062d3c1a4763, processorArchitecture=MSIL">
+      <HintPath>..\packages\ActiproSoftware.Controls.WinForms.SyntaxEditor.Addons.DotNet.21.1.0\lib\net461\ActiproSoftware.SyntaxEditor.Addons.DotNet.WinForms.dll</HintPath>
+    </Reference>
+    <Reference Include="ActiproSoftware.SyntaxEditor.Addons.JavaScript.WinForms, Version=21.1.0.0, Culture=neutral, PublicKeyToken=c27e062d3c1a4763, processorArchitecture=MSIL">
+      <HintPath>..\packages\ActiproSoftware.Controls.WinForms.SyntaxEditor.Addons.JavaScript.21.1.0\lib\net40\ActiproSoftware.SyntaxEditor.Addons.JavaScript.WinForms.dll</HintPath>
+    </Reference>
+    <Reference Include="ActiproSoftware.SyntaxEditor.Addons.Python.WinForms, Version=21.1.0.0, Culture=neutral, PublicKeyToken=c27e062d3c1a4763, processorArchitecture=MSIL">
+      <HintPath>..\packages\ActiproSoftware.Controls.WinForms.SyntaxEditor.Addons.Python.21.1.0\lib\net40\ActiproSoftware.SyntaxEditor.Addons.Python.WinForms.dll</HintPath>
+    </Reference>
+    <Reference Include="ActiproSoftware.SyntaxEditor.Addons.Xml.WinForms, Version=21.1.0.0, Culture=neutral, PublicKeyToken=c27e062d3c1a4763, processorArchitecture=MSIL">
+      <HintPath>..\packages\ActiproSoftware.Controls.WinForms.SyntaxEditor.Addons.XML.21.1.0\lib\net40\ActiproSoftware.SyntaxEditor.Addons.Xml.WinForms.dll</HintPath>
+    </Reference>
+    <Reference Include="ActiproSoftware.SyntaxEditor.WinForms, Version=21.1.0.0, Culture=neutral, PublicKeyToken=c27e062d3c1a4763, processorArchitecture=MSIL">
+      <HintPath>..\packages\ActiproSoftware.Controls.WinForms.SyntaxEditor.21.1.0\lib\net40\ActiproSoftware.SyntaxEditor.WinForms.dll</HintPath>
+    </Reference>
+    <Reference Include="ActiproSoftware.Text.Addons.DotNet.Roslyn.WinForms, Version=21.1.0.0, Culture=neutral, PublicKeyToken=c27e062d3c1a4763, processorArchitecture=MSIL">
+      <HintPath>..\packages\ActiproSoftware.Controls.WinForms.SyntaxEditor.Addons.DotNet.21.1.0\lib\net461\ActiproSoftware.Text.Addons.DotNet.Roslyn.WinForms.dll</HintPath>
+    </Reference>
+    <Reference Include="ActiproSoftware.Text.Addons.DotNet.WinForms, Version=21.1.0.0, Culture=neutral, PublicKeyToken=c27e062d3c1a4763, processorArchitecture=MSIL">
+      <HintPath>..\packages\ActiproSoftware.Controls.WinForms.SyntaxEditor.Addons.DotNet.21.1.0\lib\net461\ActiproSoftware.Text.Addons.DotNet.WinForms.dll</HintPath>
+    </Reference>
+    <Reference Include="ActiproSoftware.Text.Addons.JavaScript.WinForms, Version=21.1.0.0, Culture=neutral, PublicKeyToken=c27e062d3c1a4763, processorArchitecture=MSIL">
+      <HintPath>..\packages\ActiproSoftware.Controls.WinForms.SyntaxEditor.Addons.JavaScript.21.1.0\lib\net40\ActiproSoftware.Text.Addons.JavaScript.WinForms.dll</HintPath>
+    </Reference>
+    <Reference Include="ActiproSoftware.Text.Addons.Python.WinForms, Version=21.1.0.0, Culture=neutral, PublicKeyToken=c27e062d3c1a4763, processorArchitecture=MSIL">
+      <HintPath>..\packages\ActiproSoftware.Controls.WinForms.SyntaxEditor.Addons.Python.21.1.0\lib\net40\ActiproSoftware.Text.Addons.Python.WinForms.dll</HintPath>
+    </Reference>
+    <Reference Include="ActiproSoftware.Text.Addons.Xml.WinForms, Version=21.1.0.0, Culture=neutral, PublicKeyToken=c27e062d3c1a4763, processorArchitecture=MSIL">
+      <HintPath>..\packages\ActiproSoftware.Controls.WinForms.SyntaxEditor.Addons.XML.21.1.0\lib\net40\ActiproSoftware.Text.Addons.Xml.WinForms.dll</HintPath>
+    </Reference>
+    <Reference Include="ActiproSoftware.Text.LLParser.WinForms, Version=21.1.0.0, Culture=neutral, PublicKeyToken=c27e062d3c1a4763, processorArchitecture=MSIL">
+      <HintPath>..\packages\ActiproSoftware.Controls.WinForms.SyntaxEditor.21.1.0\lib\net40\ActiproSoftware.Text.LLParser.WinForms.dll</HintPath>
+    </Reference>
+    <Reference Include="ActiproSoftware.Text.WinForms, Version=21.1.0.0, Culture=neutral, PublicKeyToken=c27e062d3c1a4763, processorArchitecture=MSIL">
+      <HintPath>..\packages\ActiproSoftware.Controls.WinForms.SyntaxEditor.21.1.0\lib\net40\ActiproSoftware.Text.WinForms.dll</HintPath>
+    </Reference>
+    <Reference Include="ActiproSoftware.Wizard.WinForms, Version=21.1.0.0, Culture=neutral, PublicKeyToken=c27e062d3c1a4763, processorArchitecture=MSIL">
+      <HintPath>..\packages\ActiproSoftware.Controls.WinForms.Wizard.21.1.0\lib\net40\ActiproSoftware.Wizard.WinForms.dll</HintPath>
+    </Reference>
     <Reference Include="DevExpress.Data.Desktop.v21.1, Version=21.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
     <Reference Include="DevExpress.Data.v21.1, Version=21.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
     <Reference Include="DevExpress.Printing.v21.1.Core, Version=21.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
@@ -40,6 +93,9 @@
     <Reference Include="DevExpress.XtraGrid.v21.1, Version=21.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.XtraLayout.v21.1, Version=21.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
     <Reference Include="DevExpress.XtraPrinting.v21.1, Version=21.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="ICSharpCode.AvalonEdit, Version=6.1.2.30, Culture=neutral, PublicKeyToken=9cc39be672370310, processorArchitecture=MSIL">
+      <HintPath>..\packages\AvalonEdit.6.1.2.30\lib\net45\ICSharpCode.AvalonEdit.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.VisualStudio.DebuggerVisualizers, Version=17.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>C:\Program Files\Microsoft Visual Studio\2022\Preview\Common7\IDE\PublicAssemblies\Microsoft.VisualStudio.DebuggerVisualizers.dll</HintPath>
@@ -49,6 +105,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Design" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Windows.Forms" />
@@ -64,7 +121,26 @@
     <Compile Include="DebuggerEnumerableVisualizer.cs" />
     <Compile Include="JsonHelper.cs" />
     <Compile Include="EnumerableObjectSource.cs" />
+    <Compile Include="MainControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="MainControl.Designer.cs">
+      <DependentUpon>MainControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="StringVisualizerForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="StringVisualizerForm.Designer.cs">
+      <DependentUpon>StringVisualizerForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SyntaxEditorHelper.cs" />
+    <Compile Include="TextBoxExtensions.cs" />
     <Compile Include="VisualizerForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -79,10 +155,75 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Properties\licenses.licx" />
+    <EmbeddedResource Include="MainControl.resx">
+      <DependentUpon>MainControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="StringVisualizerForm.resx">
+      <DependentUpon>StringVisualizerForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="VisualizerForm.resx">
       <DependentUpon>VisualizerForm.cs</DependentUpon>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\ActiproIcon.ico" />
+    <Content Include="Resources\AnimatedSearch.gif" />
+    <Content Include="Resources\CompanyLogo.png" />
+    <Content Include="Resources\CompanyLogoIcon48.png" />
+    <Content Include="Resources\IconAdd16.png" />
+    <Content Include="Resources\IconBack16.png" />
+    <Content Include="Resources\IconBookmark16.png" />
+    <Content Include="Resources\IconBookmarkDisabled16.png" />
+    <Content Include="Resources\IconBreakpoint16.png" />
+    <Content Include="Resources\IconBreakpointToggleEnabled16.png" />
+    <Content Include="Resources\IconClose16.png" />
+    <Content Include="Resources\IconCommentLines16.png" />
+    <Content Include="Resources\IconCopy16.png" />
+    <Content Include="Resources\IconCut16.png" />
+    <Content Include="Resources\IconDelete16.png" />
+    <Content Include="Resources\IconDotNet16.png" />
+    <Content Include="Resources\IconFind16.png" />
+    <Content Include="Resources\IconFormatDocument16.png" />
+    <Content Include="Resources\IconFormatSelection16.png" />
+    <Content Include="Resources\IconHome16.png" />
+    <Content Include="Resources\IconIntelliPromptAutoComplete16.png" />
+    <Content Include="Resources\IconIntelliPromptCodeSnippetSelection16.png" />
+    <Content Include="Resources\IconIntelliPromptCompletion16.png" />
+    <Content Include="Resources\IconIntelliPromptParameterInfo16.png" />
+    <Content Include="Resources\IconIntelliPromptQuickInfo16.png" />
+    <Content Include="Resources\IconMacroRecordingCancel16.png" />
+    <Content Include="Resources\IconMacroRecordingPause16.png" />
+    <Content Include="Resources\IconMacroRecordingRecord16.png" />
+    <Content Include="Resources\IconMacroRecordingRun16.png" />
+    <Content Include="Resources\IconMacroRecordingStop16.png" />
+    <Content Include="Resources\IconNavigateDown16.png" />
+    <Content Include="Resources\IconNavigateUp16.png" />
+    <Content Include="Resources\IconNew16.png" />
+    <Content Include="Resources\IconNext16.png" />
+    <Content Include="Resources\IconOpen16.png" />
+    <Content Include="Resources\IconPaste16.png" />
+    <Content Include="Resources\IconPlay16.png" />
+    <Content Include="Resources\IconPrint16.png" />
+    <Content Include="Resources\IconPrintPreview16.png" />
+    <Content Include="Resources\IconRedo16.png" />
+    <Content Include="Resources\IconSave16.png" />
+    <Content Include="Resources\IconStop16.png" />
+    <Content Include="Resources\IconTool16.png" />
+    <Content Include="Resources\IconUncommentLines16.png" />
+    <Content Include="Resources\IconUndo16.png" />
+    <Content Include="Resources\IconXmlSchema16.png" />
+    <Content Include="Resources\ItemDemo16.png" />
+    <Content Include="Resources\ItemDocument16.png" />
+    <Content Include="Resources\ItemQuickStart16.png" />
+    <Content Include="Resources\TeaserBars.png" />
+    <Content Include="Resources\TeaserDocking.png" />
+    <Content Include="Resources\TeaserNavigation.png" />
+    <Content Include="Resources\TeaserSyntaxEditor.png" />
+    <Content Include="Resources\TeaserWizard.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
@@ -90,4 +231,11 @@
 copy "$(TargetDir)CodeCapital.EnumerableVisualizer.pdb" "$(USERPROFILE)\Documents\Visual Studio 2019\Visualizers\CodeCapital.EnumerableVisualizer.pdb"
 copy "$(TargetDir)Newtonsoft.Json.dll" "$(USERPROFILE)\Documents\Visual Studio 2019\Visualizers\Newtonsoft.Json.dll"</PostBuildEvent>
   </PropertyGroup>
+  <Import Project="..\packages\EmptyLicensesLicx.2.0.2\build\EmptyLicensesLicx.targets" Condition="Exists('..\packages\EmptyLicensesLicx.2.0.2\build\EmptyLicensesLicx.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>这台计算机上缺少此项目引用的 NuGet 程序包。使用“NuGet 程序包还原”可下载这些程序包。有关更多信息，请参见 http://go.microsoft.com/fwlink/?LinkID=322105。缺少的文件是 {0}。</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\EmptyLicensesLicx.2.0.2\build\EmptyLicensesLicx.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EmptyLicensesLicx.2.0.2\build\EmptyLicensesLicx.targets'))" />
+  </Target>
 </Project>

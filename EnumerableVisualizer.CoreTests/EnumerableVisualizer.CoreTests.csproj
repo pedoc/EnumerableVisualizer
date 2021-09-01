@@ -7,6 +7,13 @@
 
   <ItemGroup>
     <ProjectReference Include="..\EnumerableVisualizer.SharedTests\EnumerableVisualizer.SharedTests.csproj" />
+    <ProjectReference Include="..\EnumerableVisualizer\EnumerableVisualizer.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="Microsoft.VisualStudio.DebuggerVisualizers">
+      <HintPath>C:\Program Files\Microsoft Visual Studio\2022\Preview\Common7\IDE\PublicAssemblies\Microsoft.VisualStudio.DebuggerVisualizers.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
 </Project>
