@@ -121,6 +121,12 @@
     <Compile Include="DebuggerEnumerableVisualizer.cs" />
     <Compile Include="JsonHelper.cs" />
     <Compile Include="EnumerableObjectSource.cs" />
+    <Compile Include="LiteMainControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="LiteMainControl.Designer.cs">
+      <DependentUpon>LiteMainControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="MainControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -161,6 +167,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="LiteMainControl.resx">
+      <DependentUpon>LiteMainControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MainControl.resx">
       <DependentUpon>MainControl.cs</DependentUpon>
     </EmbeddedResource>
@@ -232,11 +241,11 @@
     <Content Include="Resources\TeaserWizard.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <PropertyGroup>
-    <PostBuildEvent>copy "$(TargetDir)CodeCapital.EnumerableVisualizer.dll" "$(USERPROFILE)\Documents\Visual Studio 2019\Visualizers\CodeCapital.EnumerableVisualizer.dll"
-copy "$(TargetDir)CodeCapital.EnumerableVisualizer.pdb" "$(USERPROFILE)\Documents\Visual Studio 2019\Visualizers\CodeCapital.EnumerableVisualizer.pdb"
-copy "$(TargetDir)Newtonsoft.Json.dll" "$(USERPROFILE)\Documents\Visual Studio 2019\Visualizers\Newtonsoft.Json.dll"</PostBuildEvent>
-  </PropertyGroup>
+<!--  <PropertyGroup>-->
+<!--    <PostBuildEvent>copy "$(TargetDir)CodeCapital.EnumerableVisualizer.dll" "$(USERPROFILE)\Documents\Visual Studio 2022\Visualizers\CodeCapital.EnumerableVisualizer.dll"-->
+<!--copy "$(TargetDir)CodeCapital.EnumerableVisualizer.pdb" "$(USERPROFILE)\Documents\Visual Studio 2022\Visualizers\CodeCapital.EnumerableVisualizer.pdb"-->
+<!--copy "$(TargetDir)Newtonsoft.Json.dll" "$(USERPROFILE)\Documents\Visual Studio 2022\Visualizers\Newtonsoft.Json.dll"</PostBuildEvent>-->
+<!--  </PropertyGroup>-->
   <Import Project="..\packages\EmptyLicensesLicx.2.0.2\build\EmptyLicensesLicx.targets" Condition="Exists('..\packages\EmptyLicensesLicx.2.0.2\build\EmptyLicensesLicx.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

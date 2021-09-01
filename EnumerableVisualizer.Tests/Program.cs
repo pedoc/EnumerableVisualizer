@@ -101,13 +101,13 @@ namespace EnumerableVisualizer.Tests
                 new Car(new Gadget("Tv"))
             };
             var b = new byte[] { 0x1, 0x2, 0x3 };
-            VisualizerDevelopmentHost visualizeHost = new VisualizerDevelopmentHost(b,
-                typeof(DebuggerEnumerableVisualizer), typeof(EnumerableObjectSource));
-            visualizeHost.ShowVisualizer();
+            // VisualizerDevelopmentHost visualizeHost = new VisualizerDevelopmentHost(b,
+            //     typeof(DebuggerEnumerableVisualizer), typeof(EnumerableObjectSource));
+            // visualizeHost.ShowVisualizer();
 
-            //VisualizerDevelopmentHost visualizeHost = new VisualizerDevelopmentHost(test1,
-            //    typeof(StringVisualizer), typeof(VisualizerObjectSource));
-            //visualizeHost.ShowVisualizer();
+            VisualizerDevelopmentHost visualizeHost = new VisualizerDevelopmentHost(test1,
+                typeof(StringVisualizer), typeof(VisualizerObjectSource));
+            visualizeHost.ShowVisualizer();
             //visualizeHost.ShowVisualizer();
             //CoreDebuggerEnumerableVisualizer.TestShowVisualizer(list4);
         }

@@ -18,10 +18,17 @@ namespace CodeCapital.EnumerableVisualizer
         public StringVisualizerForm(string value)
         {
             InitializeComponent();
-            var codeEditor = new MainControl()
+            // var codeEditor = new MainControl()
+            // {
+            //     Dock = DockStyle.Fill
+            // };
+            var sw = Stopwatch.StartNew();
+            var codeEditor = new LiteMainControl()
             {
                 Dock = DockStyle.Fill
             };
+            sw.Stop();
+            Console.WriteLine();
             codeEditor.SetText(value);
             this.Controls.Add(codeEditor);
         }

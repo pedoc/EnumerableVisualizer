@@ -19,12 +19,10 @@ using CodeCapital.EnumerableVisualizer.Properties;
 namespace CodeCapital.EnumerableVisualizer {
 
 	/// <summary>
-	/// Provides the main user control.
+	/// Provides the lite main user control.
 	/// </summary>
-	public partial class MainControl : UserControl {
-		
-		private bool				hasPendingParseData;
-		
+	public partial class LiteMainControl : UserControl {
+        
 		// Project assemblies used by C#/VB in the .NET Languages Add-on
 		private ActiproSoftware.Text.Languages.DotNet.Reflection.IProjectAssembly cSharpProjectAssembly;
 		private ActiproSoftware.Text.Languages.DotNet.Reflection.IProjectAssembly vbProjectAssembly;
@@ -36,15 +34,12 @@ namespace CodeCapital.EnumerableVisualizer {
 		/// <summary>
 		/// Initializes an instance of the <c>MainControl</c> class.
 		/// </summary>
-		public MainControl() {
+		public LiteMainControl() {
             InitializeComponent();
             
             // Auto-hide tool windows
             dockManager.AutoHideAllToolWindowsDockedInHost();
-
-			// Set the AST output tab stop width
-			astOutputEditor.SetTabStopWidth(1);
-			
+            
 			//
 			// NOTE: Make sure that you've read through the add-on language's 'Getting Started' topic
 			//   since it tells you how to set up an ambient parse request dispatcher and an ambient
@@ -81,7 +76,7 @@ namespace CodeCapital.EnumerableVisualizer {
 		/// </summary>
 		/// <param name="text">The text to append.</param>
 		private void AppendMessage(string text) {
-			eventsListBox.SelectedIndex = eventsListBox.Items.Add(text);
+			
 		}
 
 		/// <summary>
@@ -115,11 +110,7 @@ namespace CodeCapital.EnumerableVisualizer {
 		/// </summary>
 		/// <param name="languageKey">The key that identifies the language.</param>
 		private void LoadLanguage(string languageKey) {
-			// Clear errors and document outline
-			this.RefreshErrorList(null);
-			astOutputEditor.Text = "(Language may not have AST building features)";
-
-			switch (languageKey) {
+            switch (languageKey) {
 				case "Assembly":
 					this.LoadLanguageDefinitionFromFile("Assembly.langdef");
 					break;
@@ -287,22 +278,7 @@ namespace CodeCapital.EnumerableVisualizer {
 		private void NewFile() {
 			editor.Document.SetText(String.Empty);
 		}
-		
-		/// <summary>
-		/// Occurs when the control is double-clicked.
-		/// </summary>
-		/// <param name="sender">The sender of the event.</param>
-		/// <param name="e">A <see cref="EventArgs"/> that contains the event data.</param>
-		private void OnErrorListViewMouseDoubleClick(object sender, MouseEventArgs e) {
-			var item = errorListView.HitTest(e.X, e.Y).Item;
-			if (item != null) {
-				var error = item.Tag as IParseError;
-				if (error != null) {
-					editor.ActiveView.Selection.StartPosition = error.PositionRange.StartPosition;
-					editor.Focus();
-				}
-			}
-		}
+        
 		
 		/// <summary>
 		/// Occurs when the drop-down menu is opening.
@@ -342,11 +318,7 @@ namespace CodeCapital.EnumerableVisualizer {
 		private void OnMainToolStripItemClicked(object sender, ToolStripItemClickedEventArgs e) {
 			try {
 				switch (e.ClickedItem.Name) {
-					case nameof(cancelMacroToolStripButton):
-					case nameof(cancelRecordingToolStripMenuItem):
-						editor.ActiveView.ExecuteEditAction(EditorCommands.CancelMacroRecording);
-						break;
-					case nameof(capitalizeToolStripMenuItem):
+                    case nameof(capitalizeToolStripMenuItem):
 						editor.ActiveView.TextChangeActions.ChangeCharacterCasing(ActiproSoftware.Text.CharacterCasing.Normal);
 						break;
 					case nameof(commentLinesToolStripButton):
@@ -359,26 +331,17 @@ namespace CodeCapital.EnumerableVisualizer {
 					case nameof(convertTabsToSpacesToolStripMenuItem):
 						editor.ActiveView.TextChangeActions.ConvertTabsToSpaces();
 						break;
-					case nameof(copyAppendToolStripMenuItem):
-						editor.ActiveView.CopyAndAppendToClipboard();
+                    case nameof(copyToolStripButton):
+                        editor.ActiveView.CopyToClipboard();
 						break;
-					case nameof(copyToolStripButton):
-					case nameof(copyToolStripMenuItem):
-						editor.ActiveView.CopyToClipboard();
-						break;
-					case nameof(cutAppendToolStripMenuItem):
-						editor.ActiveView.CutAndAppendToClipboard();
-						break;
-					case nameof(cutToolStripButton):
-					case nameof(cutToolStripMenuItem):
-						editor.ActiveView.CutToClipboard();
+                    case nameof(cutToolStripButton):
+                        editor.ActiveView.CutToClipboard();
 						break;
 					case nameof(decreaseLineIndentToolStripMenuItem):
 						editor.ActiveView.TextChangeActions.Outdent();
 						break;
 					case nameof(deleteToolStripButton):
-					case nameof(deleteToolStripMenuItem):
-						editor.ActiveView.TextChangeActions.Delete();
+                        editor.ActiveView.TextChangeActions.Delete();
 						break;
 					case nameof(deleteBlankLinesToolStripMenuItem):
 						editor.ActiveView.TextChangeActions.DeleteBlankLines();
@@ -392,10 +355,7 @@ namespace CodeCapital.EnumerableVisualizer {
 					case nameof(duplicateToolStripMenuItem):
 						editor.ActiveView.TextChangeActions.Duplicate();
 						break;
-					case nameof(exitToolStripMenuItem):
-						BeginInvoke((Action)(() => { MessageBox.Show("Close the application here."); }));
-						break;
-					case nameof(formatDocumentToolStripButton):
+                    case nameof(formatDocumentToolStripButton):
 					case nameof(formatDocumentToolStripMenuItem):
 						editor.ActiveView.TextChangeActions.FormatDocument();
 						break;
@@ -416,8 +376,7 @@ namespace CodeCapital.EnumerableVisualizer {
 						editor.ActiveView.SelectedText = new ActiproSoftware.Text.Utility.LipsumGenerator().GenerateParagraph(true, 30);
 						break;
 					case nameof(insertSnippetToolStripButton):
-					case nameof(insertSnippetToolStripMenuItem):
-						editor.ActiveView.IntelliPrompt.RequestInsertSnippetSession();
+                        editor.ActiveView.IntelliPrompt.RequestInsertSnippetSession();
 						break;
 					case nameof(makeLowercaseToolStripMenuItem):
 						editor.ActiveView.TextChangeActions.ChangeCharacterCasing(ActiproSoftware.Text.CharacterCasing.Lower);
@@ -432,22 +391,15 @@ namespace CodeCapital.EnumerableVisualizer {
 						editor.ActiveView.TextChangeActions.MoveSelectedLinesUp();
 						break;
 					case nameof(newDocumentToolStripButton):
-					case nameof(newToolStripMenuItem):
-						this.NewFile();
+                        this.NewFile();
 						break;
 					case nameof(openDocumentToolStripButton):
-					case nameof(openToolStripMenuItem):
-						BeginInvoke((Action)(() => { this.OpenFile(); }));
+                        BeginInvoke((Action)(() => { this.OpenFile(); }));
 						break;
 					case nameof(pasteToolStripButton):
-					case nameof(pasteToolStripMenuItem):
-						editor.ActiveView.PasteFromClipboard();
+                        editor.ActiveView.PasteFromClipboard();
 						break;
-					case nameof(pauseRecordingToolStripButton):
-					case nameof(pauseRecordingToolStripMenuItem):
-						editor.ActiveView.ExecuteEditAction(EditorCommands.PauseResumeMacroRecording);
-						break;
-					case nameof(printPreviewToolStripButton):
+                    case nameof(printPreviewToolStripButton):
 					case nameof(printPreviewToolStripMenuItem):
 						editor.ShowPrintPreviewDialog();
 						break;
@@ -455,47 +407,28 @@ namespace CodeCapital.EnumerableVisualizer {
 					case nameof(printToolStripMenuItem):
 						editor.ShowPrintDialog();
 						break;
-					case nameof(recordMacroToolStripButton):
-					case nameof(recordMacroToolStripMenuItem):
-						editor.ActiveView.ExecuteEditAction(EditorCommands.ToggleMacroRecording);
-						break;
-					case nameof(redoToolStripButton):
-					case nameof(redoToolStripMenuItem):
-						editor.Document.UndoHistory.Redo();
+                    case nameof(redoToolStripButton):
+                        editor.Document.UndoHistory.Redo();
 						break;
 					case nameof(requestIntelliPromptAutoCompleteToolStripButton):
-					case nameof(completeWordToolStripMenuItem):
-						editor.ActiveView.IntelliPrompt.RequestAutoComplete();
+                        editor.ActiveView.IntelliPrompt.RequestAutoComplete();
 						break;
 					case nameof(requestIntelliPromptCompletionSessionToolStripButton):
-					case nameof(completionListToolStripMenuItem):
-						editor.ActiveView.IntelliPrompt.RequestCompletionSession();
+                        editor.ActiveView.IntelliPrompt.RequestCompletionSession();
 						break;
 					case nameof(requestIntelliPromptParameterInfoSessionToolStripButton):
-					case nameof(parameterInfoToolStripMenuItem):
-						editor.ActiveView.IntelliPrompt.RequestParameterInfoSession();
+                        editor.ActiveView.IntelliPrompt.RequestParameterInfoSession();
 						break;
 					case nameof(requestIntelliPromptQuickInfoSessionToolStripButton):
-					case nameof(quickInfoToolStripMenuItem):
-						editor.ActiveView.IntelliPrompt.RequestQuickInfoSession();
+                        editor.ActiveView.IntelliPrompt.RequestQuickInfoSession();
 						break;
-					case nameof(runMacroToolStripButton):
-					case nameof(runRecordedMacroToolStripMenuItem):
-						editor.ActiveView.ExecuteEditAction(EditorCommands.RunMacro);
-						break;
-					case nameof(saveDocumentToolStripButton):
+                    case nameof(saveDocumentToolStripButton):
 					case nameof(saveToolStripMenuItem):
 						// NOTE: Save the document here and flag as not modified
 						BeginInvoke((Action)(() => { MessageBox.Show("Save the document here."); }));
 						editor.Document.IsModified = false;
 						break;
-					case nameof(selectAllToolStripMenuItem):
-						editor.ActiveView.Selection.SelectAll();
-						break;
-					case nameof(surroundWithToolStripMenuItem):
-						editor.ActiveView.IntelliPrompt.RequestSurroundWithSession();
-						break;
-					case nameof(tabifySelectedLinesToolStripMenuItem):
+                    case nameof(tabifySelectedLinesToolStripMenuItem):
 						editor.ActiveView.TextChangeActions.TabifySelectedLines();
 						break;
 					case nameof(toggleCharacterCasingToolStripMenuItem):
@@ -521,8 +454,7 @@ namespace CodeCapital.EnumerableVisualizer {
 						editor.ActiveView.TextChangeActions.UncommentLines();
 						break;
 					case nameof(undoToolStripButton):
-					case nameof(undoToolStripMenuItem):
-						editor.Document.UndoHistory.Undo();
+                        editor.Document.UndoHistory.Undo();
 						break;
 					case nameof(untabifySelectedLinesToolStripMenuItem):
 						editor.ActiveView.TextChangeActions.UntabifySelectedLines();
@@ -679,9 +611,7 @@ namespace CodeCapital.EnumerableVisualizer {
 			//         there is a pending parse data change, which will be handled in the 
 			//         UserInterfaceUpdate event
 			//
-
-			hasPendingParseData = true;
-		}
+        }
 		
 		/// <summary>
 		/// Occurs when the <c>SyntaxEditor.IsOverwriteModeActiveChanged</c> event occurs.
@@ -693,85 +623,7 @@ namespace CodeCapital.EnumerableVisualizer {
 			overwriteModePanel.Text = (editor.IsOverwriteModeActive ? "OVR" : "INS");
 		}
 
-		/// <summary>
-		/// Occurs when the <c>SyntaxEditor.MacroRecordingStateChanged</c> event occurs.
-		/// </summary>
-		/// <param name="sender">The sender of the event.</param>
-		/// <param name="e">The <see cref="EventArgs"/> that contains the event data.</param>
-		private void OnSyntaxEditorMacroRecordingStateChanged(object sender, EventArgs e) {
-			this.AppendMessage("MacroRecordingStateChanged: " + editor.MacroRecording.State);
-
-			switch (editor.MacroRecording.State) {
-				case MacroRecordingState.Recording:
-					messagePanel.Text = "Macro recording is active";
-					recordMacroToolStripButton.Image = Resources.IconMacroRecordingStop16;
-					recordMacroToolStripButton.ToolTipText = "Stop Recording";
-					pauseRecordingToolStripButton.Checked = false;
-					pauseRecordingToolStripButton.ToolTipText = "Pause Recording";
-					break;
-				case MacroRecordingState.Paused:
-					messagePanel.Text = "Macro recording is paused";
-					pauseRecordingToolStripButton.Checked = true;
-					pauseRecordingToolStripButton.ToolTipText = "Resume Recording";
-					break;
-				default:
-					messagePanel.Text = "Ready";
-					recordMacroToolStripButton.Image = Resources.IconMacroRecordingRecord16;
-					recordMacroToolStripButton.ToolTipText = "Record Macro";
-					pauseRecordingToolStripButton.Checked = false;
-					pauseRecordingToolStripButton.ToolTipText = "Pause Recording";
-					break;
-			}
-
-			var view = editor.ActiveView;
-			runMacroToolStripButton.Enabled = EditorCommands.RunMacro.CanExecute(view);
-			recordMacroToolStripButton.Enabled = EditorCommands.ToggleMacroRecording.CanExecute(view);
-			pauseRecordingToolStripButton.Enabled = EditorCommands.PauseResumeMacroRecording.CanExecute(view);
-			cancelMacroToolStripButton.Enabled = EditorCommands.CancelMacroRecording.CanExecute(view);
-
-			runRecordedMacroToolStripMenuItem.Enabled = runMacroToolStripButton.Enabled;
-			recordMacroToolStripMenuItem.Enabled = recordMacroToolStripButton.Enabled;
-			recordMacroToolStripMenuItem.Text = recordMacroToolStripButton.Text;
-			pauseRecordingToolStripMenuItem.Enabled = pauseRecordingToolStripButton.Enabled;
-			pauseRecordingToolStripMenuItem.Text = pauseRecordingToolStripButton.Text;
-			cancelRecordingToolStripMenuItem.Enabled = cancelMacroToolStripButton.Enabled;
-		}
-
-		/// <summary>
-		/// Occurs after a brief delay following any document text, parse data, or view selection update, allowing consumers to update the user interface during an idle period.
-		/// </summary>
-		/// <param name="sender">The sender of the event.</param>
-		/// <param name="e">The <see cref="EventArgs"/> that contains data related to this event.</param>
-		private void OnSyntaxEditorUserInterfaceUpdate(object sender, EventArgs e) {
-			// If there is a pending parse data change...
-			if (hasPendingParseData) {
-				// Clear flag
-				hasPendingParseData = false;
-
-				var parseData = editor.Document.ParseData as ILLParseData;
-				if (parseData != null) {
-					if (editor.Document.CurrentSnapshot.Length < 10000) {
-						// Show the AST
-						if (parseData.Ast != null)
-							astOutputEditor.Text = parseData.Ast.ToTreeString(0);
-						else
-							astOutputEditor.Text = null;
-					}
-					else
-						astOutputEditor.Text = "(Not displaying large AST for performance reasons)";
-
-					// Output errors
-					this.RefreshErrorList(parseData.Errors);
-				}
-				else {
-					// Clear UI
-					astOutputEditor.Text = null;
-					this.RefreshErrorList(null);
-				}
-			}
-		}
-		
-		/// <summary>
+        /// <summary>
 		/// Occurs when the incremental search mode of an <see cref="ITextView"/> is activated or deactivated.
 		/// </summary>
 		/// <param name="sender">The sender of the event.</param>
@@ -894,25 +746,7 @@ namespace CodeCapital.EnumerableVisualizer {
 				}
 			}
 		}
-
-		/// <summary>
-		/// Refreshes the list.
-		/// </summary>
-		/// <param name="errors">The error collection.</param>
-		private void RefreshErrorList(IEnumerable<IParseError> errors) {
-			errorListView.Items.Clear();
-
-			if (errors != null) {
-				foreach (var error in errors) {
-					var item = new ListViewItem(new string[] { 
-						error.PositionRange.StartPosition.DisplayLine.ToString(), error.PositionRange.StartPosition.DisplayCharacter.ToString(), error.Description
-					});
-					item.Tag = error;
-					errorListView.Items.Add(item);
-				}
-			}
-		}
-
+        
 		/////////////////////////////////////////////////////////////////////////////////////////////////////
 		// PUBLIC PROCEDURES
 		/////////////////////////////////////////////////////////////////////////////////////////////////////
